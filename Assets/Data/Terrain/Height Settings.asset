@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f41d65a97763644935f2f84ecfcc03, type: 3}
   m_Name: Height Settings
   m_EditorClassIdentifier: 
-  worldRadius: 150
+  worldRadius: 6
   heightMultiplier: 3
