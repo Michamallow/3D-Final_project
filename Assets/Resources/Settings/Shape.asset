@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f41d65a97763644935f2f84ecfcc03, type: 3}
-  m_Name: Height Settings
+  m_Script: {fileID: 11500000, guid: 5be439d05a91afb4e8dd4852da681b1c, type: 3}
+  m_Name: Shape
   m_EditorClassIdentifier: 
-  worldRadius: 5
-  heightMultiplier: 3
+  planetRadius: 3.47
