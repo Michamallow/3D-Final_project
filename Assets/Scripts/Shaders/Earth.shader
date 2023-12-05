@@ -52,18 +52,6 @@ Shader "Custom/Earth"
                 float2 texCoord = pointToUV(spherePos);
                 fixed4 col = tex2D(_MainTex, texCoord) * _AlbedoColor; // Multiply with Albedo Color
 
-                // Test circle
-                float2 coord = float2(_Longitude, _Latitude) * (3.1415 / 180);
-                float3 testPoint = longitudeLatitudeToPoint(coord);
-                const float earthRadiusKM = 6371;
-                float dstKM = distanceBetweenPointsOnUnitSphere(testPoint, spherePos) * earthRadiusKM;
-                if (dstKM < 25) {
-                    return 1;
-                }
-                if (dstKM < _TestRadiusKM) {
-                    return lerp(col, fixed4(1,0,0,0), 0.75);
-                }
-
                 return col;
             }
             ENDCG
