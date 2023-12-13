@@ -3,7 +3,6 @@ using UnityEngine;
 public class EarthBehaviour : MonoBehaviour
 {
     Vector3 originMousePos = Vector3.zero;
-    Vector3 deltaMousePos = Vector3.zero;
     Vector2 rotationVelocity = Vector2.zero;
     [SerializeField]
     float velocity_factor = 1; // Adjust this value for rotation smoothness
@@ -13,16 +12,19 @@ public class EarthBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CastRay(Input.mousePosition) && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            originMousePos = deltaMousePos = Input.mousePosition;
+            originMousePos = Input.mousePosition;
             rotationVelocity = Vector2.zero; // Reset velocity on mouse down
         }
         else if (Input.GetMouseButton(0))
         {
+            print("MOUSE MOVE");
             Vector3 delta = Input.mousePosition - originMousePos;
-            rotationVelocity = delta * Time.deltaTime * speed_factor; // Adjust speed
+            print(delta);
+            rotationVelocity = speed_factor * Time.deltaTime * delta; // Adjust speed
             RotateSphere(rotationVelocity);
+            originMousePos = Input.mousePosition;
         }
         else
         {
@@ -30,14 +32,6 @@ public class EarthBehaviour : MonoBehaviour
             rotationVelocity = Vector2.Lerp(rotationVelocity, Vector2.zero, velocity_factor * Time.deltaTime);
             RotateSphere(rotationVelocity);
         }
-    }
-
-    private bool CastRay(Vector3 pos)
-    {
-        Ray ray = Camera.main.ScreenPointToRay(pos);
-        if (Physics.Raycast(ray))
-            return true;
-        return false;
     }
 
     private void RotateSphere(Vector2 delta)
