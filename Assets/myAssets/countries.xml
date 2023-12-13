@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+	<country tag="AD" name_en="Andorra" name_fr="Andorre" name_es="Andorra"/>
+	<country tag="AE" name_en="United Arab Emirates" name_fr="Émirats arabes unis" name_es="Emiratos Árabes Unidos"/>
+	<country tag="AF" name_en="Afghanistan" name_fr="Afghanistan" name_es="Afganistán"/>
+	<country tag="AG" name_en="Antigua and Barbuda" name_fr="Antigua-et-Barbuda" name_es="Antigua y Barbuda"/>
+	<country tag="AI" name_en="Anguilla" name_fr="Anguilla" name_es="Anguila"/>
+	<country tag="AL" name_en="Albania" name_fr="Albanie" name_es="Albania"/>
+	<country tag="AM" name_en="Armenia" name_fr="Arménie" name_es="Armenia"/>
+	<country tag="AO" name_en="Angola" name_fr="Angola" name_es="Angola"/>
+	<country tag="AQ" name_en="Antarctica" name_fr="Antarctique" name_es="Antártida"/>
+	<country tag="AR" name_en="Argentina" name_fr="Argentine" name_es="Argentina"/>
+	<country tag="AS" name_en="American Samoa" name_fr="Samoa américaines" name_es="Samoa Americana"/>
+	<country tag="AT" name_en="Austria" name_fr="Autriche" name_es="Austria"/>
+	<country tag="AU" name_en="Australia" name_fr="Australie" name_es="Australia"/>
+	<country tag="AW" name_en="Aruba" name_fr="Aruba" name_es="Aruba"/>
+	<country tag="AX" name_en="Åland Islands" name_fr="Îles Åland" name_es="Islas Åland"/>
+	<country tag="AZ" name_en="Azerbaijan" name_fr="Azerbaïdjan" name_es="Azerbaiyán"/>
+	<country tag="BA" name_en="Bosnia and Herzegovina" name_fr="Bosnie-Herzégovine" name_es="Bosnia y Herzegovina"/>
+	<country tag="BB" name_en="Barbados" name_fr="Barbade" name_es="Barbados"/>
+	<country tag="BD" name_en="Bangladesh" name_fr="Bangladesh" name_es="Bangladés"/>
+	<country tag="BE" name_en="Belgium" name_fr="Belgique" name_es="Bélgica"/>
+	<country tag="BF" name_en="Burkina Faso" name_fr="Burkina Faso" name_es="Burkina Faso"/>
+	<country tag="BG" name_en="Bulgaria" name_fr="Bulgarie" name_es="Bulgaria"/>
+	<country tag="BH" name_en="Bahrain" name_fr="Bahreïn" name_es="Baréin"/>
+	<country tag="BI" name_en="Burundi" name_fr="Burundi" name_es="Burundi"/>
+	<country tag="BJ" name_en="Benin" name_fr="Bénin" name_es="Benín"/>
+	<country tag="BL" name_en="Saint Barthélemy" name_fr="Saint-Barthélemy" name_es="San Bartolomé"/>
+	<country tag="BM" name_en="Bermuda" name_fr="Bermudes" name_es="Bermudas"/>
+	<country tag="BN" name_en="Brunei Darussalam" name_fr="Brunéi Darussalam" name_es="Brunéi"/>
+	<country tag="BO" name_en="Bolivia" name_fr="Bolivie" name_es="Bolivia"/>
+	<country tag="BQ" name_en="Bonaire, Sint Eustatius and Saba" name_fr="Bonaire, Saint-Eustache et Saba" name_es="Bonaire, San Eustaquio y Saba"/>
+	<country tag="BR" name_en="Brazil" name_fr="Brésil" name_es="Brasil"/>
+	<country tag="BS" name_en="Bahamas" name_fr="Bahamas" name_es="Bahamas"/>
+	<country tag="BT" name_en="Bhutan" name_fr="Bhoutan" name_es="Bután"/>
+	<country tag="BV" name_en="Bouvet Island" name_fr="Île Bouvet" name_es="Isla Bouvet"/>
+	<country tag="BW" name_en="Botswana" name_fr="Botswana" name_es="Botsuana"/>
+	<country tag="BY" name_en="Belarus" name_fr="Bélarus" name_es="Bielorrusia"/>
+	<country tag="BZ" name_en="Belize" name_fr="Belize" name_es="Belice"/>
+	<country tag="CA" name_en="Canada" name_fr="Canada" name_es="Canadá"/>
+	<country tag="CC" name_en="Cocos (Keeling) Islands" name_fr="Îles Cocos (Keeling)" name_es="Islas Cocos (Keeling)"/>
+	<country tag="CD" name_en="Congo, Democratic Republic of the" name_fr="Congo, République démocratique du" name_es="Congo, República Democrática del"/>
+	<country tag="CF" name_en="Central African Republic" name_fr="République centrafricaine" name_es="República Centroafricana"/>
+	<country tag="CG" name_en="Congo" name_fr="Congo" name_es="Congo"/>
+	<country tag="CH" name_en="Switzerland" name_fr="Suisse" name_es="Suiza"/>
+	<country tag="CI" name_en="Côte d'Ivoire" name_fr="Côte d'Ivoire" name_es="Costa de Marfil"/>
+	<country tag="CK" name_en="Cook Islands" name_fr="Îles Cook" name_es="Islas Cook"/>
+	<country tag="CL" name_en="Chile" name_fr="Chili" name_es="Chile"/>
+	<country tag="CM" name_en="Cameroon" name_fr="Cameroun" name_es="Camerún"/>
+	<country tag="CN" name_en="China" name_fr="Chine" name_es="China"/>
+	<country tag="CO" name_en="Colombia" name_fr="Colombie" name_es="Colombia"/>
+	<country tag="CR" name_en="Costa Rica" name_fr="Costa Rica" name_es="Costa Rica"/>
+	<country tag="CU" name_en="Cuba" name_fr="Cuba" name_es="Cuba"/>
+	<country tag="CV" name_en="Cabo Verde" name_fr="Cap-Vert" name_es="Cabo Verde"/>
+	<country tag="CW" name_en="Curaçao" name_fr="Curaçao" name_es="Curazao"/>
+	<country tag="CX" name_en="Christmas Island" name_fr="Île Christmas" name_es="Isla de Navidad"/>
+	<country tag="CY" name_en="Cyprus" name_fr="Chypre" name_es="Chipre"/>
+	<country tag="CZ" name_en="Czech Republic" name_fr="République tchèque" name_es="República Checa"/>
+	<country tag="DE" name_en="Germany" name_fr="Allemagne" name_es="Alemania"/>
+	<country tag="DJ" name_en="Djibouti" name_fr="Djibouti" name_es="Yibuti"/>
+	<country tag="DK" name_en="Denmark" name_fr="Danemark" name_es="Dinamarca"/>
+	<country tag="DM" name_en="Dominica" name_fr="Dominique" name_es="Dominica"/>
+	<country tag="DO" name_en="Dominican Republic" name_fr="République dominicaine" name_es="República Dominicana"/>
+	<country tag="DZ" name_en="Algeria" name_fr="Algérie" name_es="Argelia"/>
+	<country tag="EC" name_en="Ecuador" name_fr="Équateur" name_es="Ecuador"/>
+	<country tag="EE" name_en="Estonia" name_fr="Estonie" name_es="Estonia"/>
+	<country tag="EG" name_en="Egypt" name_fr="Égypte" name_es="Egipto"/>
+	<country tag="EH" name_en="Western Sahara" name_fr="Sahara occidental" name_es="Sáhara Occidental"/>
+	<country tag="ER" name_en="Eritrea" name_fr="Érythrée" name_es="Eritrea"/>
+	<country tag="ES" name_en="Spain" name_fr="Espagne" name_es="España"/>
+	<country tag="ET" name_en="Ethiopia" name_fr="Éthiopie" name_es="Etiopía"/>
+	<country tag="FI" name_en="Finland" name_fr="Finlande" name_es="Finlandia"/>
+	<country tag="FJ" name_en="Fiji" name_fr="Fidji" name_es="Fiyi"/>
+	<country tag="FK" name_en="Falkland Islands (Malvinas)" name_fr="Îles Falkland (Malvinas)" name_es="Islas Malvinas"/>
+	<country tag="FM" name_en="Micronesia, Federated States of" name_fr="Micronésie, États fédérés de" name_es="Micronesia, Estados Federados de"/>
+	<country tag="FO" name_en="Faroe Islands" name_fr="Îles Féroé" name_es="Islas Feroe"/>
+	<country tag="FR" name_en="France" name_fr="France" name_es="Francia"/>
+	<country tag="GA" name_en="Gabon" name_fr="Gabon" name_es="Gabón"/>
+	<country tag="GB" name_en="United Kingdom" name_fr="Royaume-Uni" name_es="Reino Unido"/>
+	<country tag="GB-ENG" name_en="England" name_fr="Angleterre" name_es="Inglaterra"/>
+	<country tag="GB-NIR" name_en="Northern Ireland" name_fr="Irlande du Nord" name_es="Irlanda del Norte"/>
+	<country tag="GB-SCT" name_en="Scotland" name_fr="Écosse" name_es="Escocia"/>
+	<country tag="GB-WLS" name_en="Wales" name_fr="Pays de Galles" name_es="Gales"/>
+	<country tag="GD" name_en="Grenada" name_fr="Grenade" name_es="Granada"/>
+	<country tag="GE" name_en="Georgia" name_fr="Géorgie" name_es="Georgia"/>
+	<country tag="GF" name_en="French Guiana" name_fr="Guyane française" name_es="Guayana Francesa"/>
+	<country tag="GG" name_en="Guernsey" name_fr="Guernesey" name_es="Guernsey"/>
+	<country tag="GH" name_en="Ghana" name_fr="Ghana" name_es="Ghana"/>
+	<country tag="GI" name_en="Gibraltar" name_fr="Gibraltar" name_es="Gibraltar"/>
+	<country tag="GL" name_en="Greenland" name_fr="Groenland" name_es="Groenlandia"/>
+	<country tag="GM" name_en="Gambia" name_fr="Gambie" name_es="Gambia"/>
+	<country tag="GN" name_en="Guinea" name_fr="Guinée" name_es="Guinea"/>
+	<country tag="GP" name_en="Guadeloupe" name_fr="Guadeloupe" name_es="Guadalupe"/>
+	<country tag="GQ" name_en="Equatorial Guinea" name_fr="Guinée équatoriale" name_es="Guinea Ecuatorial"/>
+	<country tag="GR" name_en="Greece" name_fr="Grèce" name_es="Grecia"/>
+	<country tag="GS" name_en="South Georgia and the South Sandwich Islands" name_fr="Géorgie du Sud et les îles Sandwich du Sud" name_es="Islas Georgias del Sur y Sandwich del Sur"/>
+	<country tag="GT" name_en="Guatemala" name_fr="Guatemala" name_es="Guatemala"/>
+	<country tag="GU" name_en="Guam" name_fr="Guam" name_es="Guam"/>
+	<country tag="GW" name_en="Guinea-Bissau" name_fr="Guinée-Bissau" name_es="Guinea-Bissau"/>
+	<country tag="GY" name_en="Guyana" name_fr="Guyana" name_es="Guyana"/>
+	<country tag="HK" name_en="Hong Kong" name_fr="Hong Kong" name_es="Hong Kong"/>
+	<country tag="HM" name_en="Heard Island and McDonald Islands" name_fr="Îles Heard et McDonald" name_es="Islas Heard y McDonald"/>
+	<country tag="HN" name_en="Honduras" name_fr="Honduras" name_es="Honduras"/>
+	<country tag="HR" name_en="Croatia" name_fr="Croatie" name_es="Croacia"/>
+	<country tag="HT" name_en="Haiti" name_fr="Haïti" name_es="Haití"/>
+	<country tag="HU" name_en="Hungary" name_fr="Hongrie" name_es="Hungría"/>
+	<country tag="ID" name_en="Indonesia" name_fr="Indonésie" name_es="Indonesia"/>
+	<country tag="IE" name_en="Ireland" name_fr="Irlande" name_es="Irlanda"/>
+	<country tag="IL" name_en="Israel" name_fr="Israël" name_es="Israel"/>
+	<country tag="IM" name_en="Isle of Man" name_fr="Île de Man" name_es="Isla de Man"/>
+	<country tag="IN" name_en="India" name_fr="Inde" name_es="India"/>
+	<country tag="IO" name_en="British Indian Ocean Territory" name_fr="Territoire britannique de l'océan Indien" name_es="Territorio Británico del Océano Índico"/>
+	<country tag="IQ" name_en="Iraq" name_fr="Irak" name_es="Irak"/>
+	<country tag="IR" name_en="Iran" name_fr="Iran" name_es="Irán"/>
+	<country tag="IS" name_en="Iceland" name_fr="Islande" name_es="Islandia"/>
+	<country tag="IT" name_en="Italy" name_fr="Italie" name_es="Italia"/>
+	<country tag="JE" name_en="Jersey" name_fr="Jersey" name_es="Jersey"/>
+	<country tag="JM" name_en="Jamaica" name_fr="Jamaïque" name_es="Jamaica"/>
+	<country tag="JO" name_en="Jordan" name_fr="Jordanie" name_es="Jordania"/>
+	<country tag="JP" name_en="Japan" name_fr="Japon" name_es="Japón"/>
+	<country tag="KE" name_en="Kenya" name_fr="Kenya" name_es="Kenia"/>
+	<country tag="KG" name_en="Kyrgyzstan" name_fr="Kirghizistan" name_es="Kirguistán"/>
+	<country tag="KH" name_en="Cambodia" name_fr="Cambodge" name_es="Camboya"/>
+	<country tag="KI" name_en="Kiribati" name_fr="Kiribati" name_es="Kiribati"/>
+	<country tag="KM" name_en="Comoros" name_fr="Comores" name_es="Comoras"/>
+	<country tag="KN" name_en="Saint Kitts and Nevis" name_fr="Saint-Christophe-et-Niévès" name_es="San Cristóbal y Nieves"/>
+	<country tag="KP" name_en="North Korea" name_fr="Corée du Nord" name_es="Corea del Norte"/>
+	<country tag="KR" name_en="South Korea" name_fr="Corée du Sud" name_es="Corea del Sur"/>
+	<country tag="KW" name_en="Kuwait" name_fr="Koweït" name_es="Kuwait"/>
+	<country tag="KY" name_en="Cayman Islands" name_fr="Îles Caïmans" name_es="Islas Caimán"/>
+	<country tag="KZ" name_en="Kazakhstan" name_fr="Kazakhstan" name_es="Kazajistán"/>
+	<country tag="LA" name_en="Laos" name_fr="Laos" name_es="Laos"/>
+	<country tag="LB" name_en="Lebanon" name_fr="Liban" name_es="Líbano"/>
+	<country tag="LC" name_en="Saint Lucia" name_fr="Sainte-Lucie" name_es="Santa Lucía"/>
+	<country tag="LI" name_en="Liechtenstein" name_fr="Liechtenstein" name_es="Liechtenstein"/>
+	<country tag="LK" name_en="Sri Lanka" name_fr="Sri Lanka" name_es="Sri Lanka"/>
+	<country tag="LR" name_en="Liberia" name_fr="Libéria" name_es="Liberia"/>
+	<country tag="LS" name_en="Lesotho" name_fr="Lesotho" name_es="Lesoto"/>
+	<country tag="LT" name_en="Lithuania" name_fr="Lituanie" name_es="Lituania"/>
+	<country tag="LU" name_en="Luxembourg" name_fr="Luxembourg" name_es="Luxemburgo"/>
+	<country tag="LV" name_en="Latvia" name_fr="Lettonie" name_es="Letonia"/>
+	<country tag="LY" name_en="Libya" name_fr="Libye" name_es="Libia"/>
+	<country tag="MA" name_en="Morocco" name_fr="Maroc" name_es="Marruecos"/>
+	<country tag="MC" name_en="Monaco" name_fr="Monaco" name_es="Mónaco"/>
+	<country tag="MD" name_en="Moldova" name_fr="Moldavie" name_es="Moldavia"/>
+	<country tag="ME" name_en="Montenegro" name_fr="Monténégro" name_es="Montenegro"/>
+	<country tag="MF" name_en="Saint Martin (French part)" name_fr="Saint-Martin (partie française)" name_es="San Martín (parte francesa)"/>
+	<country tag="MG" name_en="Madagascar" name_fr="Madagascar" name_es="Madagascar"/>
+	<country tag="MH" name_en="Marshall Islands" name_fr="Îles Marshall" name_es="Islas Marshall"/>
+	<country tag="MK" name_en="North Macedonia" name_fr="Macédoine du Nord" name_es="Macedonia del Norte"/>
+	<country tag="ML" name_en="Mali" name_fr="Mali" name_es="Malí"/>
+	<country tag="MM" name_en="Myanmar" name_fr="Birmanie" name_es="Myanmar"/>
+	<country tag="MN" name_en="Mongolia" name_fr="Mongolie" name_es="Mongolia"/>
+	<country tag="MO" name_en="Macao" name_fr="Macao" name_es="Macao"/>
+	<country tag="MP" name_en="Northern Mariana Islands" name_fr="Îles Mariannes du Nord" name_es="Islas Marianas del Norte"/>
+	<country tag="MQ" name_en="Martinique" name_fr="Martinique" name_es="Martinica"/>
+	<country tag="MR" name_en="Mauritania" name_fr="Mauritanie" name_es="Mauritania"/>
+	<country tag="MS" name_en="Montserrat" name_fr="Montserrat" name_es="Montserrat"/>
+	<country tag="MT" name_en="Malta" name_fr="Malte" name_es="Malta"/>
+	<country tag="MU" name_en="Mauritius" name_fr="Maurice" name_es="Mauricio"/>
+	<country tag="MV" name_en="Maldives" name_fr="Maldives" name_es="Maldivas"/>
+	<country tag="MW" name_en="Malawi" name_fr="Malawi" name_es="Malaui"/>
+	<country tag="MX" name_en="Mexico" name_fr="Mexique" name_es="México"/>
+	<country tag="MY" name_en="Malaysia" name_fr="Malaisie" name_es="Malasia"/>
+	<country tag="MZ" name_en="Mozambique" name_fr="Mozambique" name_es="Mozambique"/>
+	<country tag="NA" name_en="Namibia" name_fr="Namibie" name_es="Namibia"/>
+	<country tag="NC" name_en="New Caledonia" name_fr="Nouvelle-Calédonie" name_es="Nueva Caledonia"/>
+	<country tag="NE" name_en="Niger" name_fr="Niger" name_es="Níger"/>
+	<country tag="NF" name_en="Norfolk Island" name_fr="Île Norfolk" name_es="Isla Norfolk"/>
+	<country tag="NG" name_en="Nigeria" name_fr="Nigéria" name_es="Nigeria"/>
+	<country tag="NI" name_en="Nicaragua" name_fr="Nicaragua" name_es="Nicaragua"/>
+	<country tag="NL" name_en="Netherlands" name_fr="Pays-Bas" name_es="Países Bajos"/>
+	<country tag="NO" name_en="Norway" name_fr="Norvège" name_es="Noruega"/>
+	<country tag="NP" name_en="Nepal" name_fr="Népal" name_es="Nepal"/>
+	<country tag="NR" name_en="Nauru" name_fr="Nauru" name_es="Nauru"/>
+	<country tag="NU" name_en="Niue" name_fr="Niue" name_es="Niue"/>
+	<country tag="NZ" name_en="New Zealand" name_fr="Nouvelle-Zélande" name_es="Nueva Zelanda"/>
+	<country tag="OM" name_en="Oman" name_fr="Oman" name_es="Omán"/>
+	<country tag="PA" name_en="Panama" name_fr="Panama" name_es="Panamá"/>
+	<country tag="PE" name_en="Peru" name_fr="Pérou" name_es="Perú"/>
+	<country tag="PF" name_en="French Polynesia" name_fr="Polynésie française" name_es="Polinesia Francesa"/>
+	<country tag="PG" name_en="Papua New Guinea" name_fr="Papouasie-Nouvelle-Guinée" name_es="Papúa Nueva Guinea"/>
+	<country tag="PH" name_en="Philippines" name_fr="Philippines" name_es="Filipinas"/>
+	<country tag="PK" name_en="Pakistan" name_fr="Pakistan" name_es="Pakistán"/>
+	<country tag="PL" name_en="Poland" name_fr="Pologne" name_es="Polonia"/>
+	<country tag="PM" name_en="Saint Pierre and Miquelon" name_fr="Saint-Pierre-et-Miquelon" name_es="San Pedro y Miquelón"/>
+	<country tag="PN" name_en="Pitcairn Islands" name_fr="Îles Pitcairn" name_es="Islas Pitcairn"/>
+	<country tag="PR" name_en="Puerto Rico" name_fr="Porto Rico" name_es="Puerto Rico"/>
+	<country tag="PS" name_en="Palestine" name_fr="Palestine" name_es="Palestina"/>
+	<country tag="PT" name_en="Portugal" name_fr="Portugal" name_es="Portugal"/>
+	<country tag="PW" name_en="Palau" name_fr="Palaos" name_es="Palaos"/>
+	<country tag="PY" name_en="Paraguay" name_fr="Paraguay" name_es="Paraguay"/>
+	<country tag="QA" name_en="Qatar" name_fr="Qatar" name_es="Catar"/>
+	<country tag="RE" name_en="Réunion" name_fr="Réunion" name_es="Reunión"/>
+	<country tag="RO" name_en="Romania" name_fr="Roumanie" name_es="Rumania"/>
+	<country tag="RS" name_en="Serbia" name_fr="Serbie" name_es="Serbia"/>
+	<country tag="RU" name_en="Russia" name_fr="Russie" name_es="Rusia"/>
+	<country tag="RW" name_en="Rwanda" name_fr="Rwanda" name_es="Ruanda"/>
+	<country tag="SA" name_en="Saudi Arabia" name_fr="Arabie saoudite" name_es="Arabia Saudita"/>
+	<country tag="SB" name_en="Solomon Islands" name_fr="Îles Salomon" name_es="Islas Salomón"/>
+	<country tag="SC" name_en="Seychelles" name_fr="Seychelles" name_es="Seychelles"/>
+	<country tag="SD" name_en="Sudan" name_fr="Soudan" name_es="Sudán"/>
+	<country tag="SE" name_en="Sweden" name_fr="Suède" name_es="Suecia"/>
+	<country tag="SG" name_en="Singapore" name_fr="Singapour" name_es="Singapur"/>
+	<country tag="SH" name_en="Saint Helena" name_fr="Sainte-Hélène" name_es="Santa Elena"/>
+	<country tag="SI" name_en="Slovenia" name_fr="Slovénie" name_es="Eslovenia"/>
+	<country tag="SJ" name_en="Svalbard and Jan Mayen" name_fr="Svalbard et Jan Mayen" name_es="Svalbard y Jan Mayen"/>
+	<country tag="SK" name_en="Slovakia" name_fr="Slovaquie" name_es="Eslovaquia"/>
+	<country tag="SL" name_en="Sierra Leone" name_fr="Sierra Leone" name_es="Sierra Leona"/>
+	<country tag="SM" name_en="San Marino" name_fr="Saint-Marin" name_es="San Marino"/>
+	<country tag="SN" name_en="Senegal" name_fr="Sénégal" name_es="Senegal"/>
+	<country tag="SO" name_en="Somalia" name_fr="Somalie" name_es="Somalia"/>
+	<country tag="SR" name_en="Suriname" name_fr="Surinam" name_es="Surinam"/>
+	<country tag="SS" name_en="South Sudan" name_fr="Soudan du Sud" name_es="Sudán del Sur"/>
+	<country tag="ST" name_en="São Tomé and Príncipe" name_fr="Sao Tomé-et-Principe" name_es="Santo Tomé y Príncipe"/>
+	<country tag="SV" name_en="El Salvador" name_fr="Salvador" name_es="El Salvador"/>
+	<country tag="SX" name_en="Sint Maarten" name_fr="Saint-Martin (partie néerlandaise)" name_es="Sint Maarten"/>
+	<country tag="SY" name_en="Syria" name_fr="Syrie" name_es="Siria"/>
+	<country tag="SZ" name_en="Eswatini" name_fr="Eswatini" name_es="Esuatini"/>
+	<country tag="TC" name_en="Turks and Caicos Islands" name_fr="Îles Turques-et-Caïques" name_es="Islas Turcas y Caicos"/>
+	<country tag="TD" name_en="Chad" name_fr="Tchad" name_es="Chad"/>
+	<country tag="TF" name_en="French Southern and Antarctic Lands" name_fr="Terres australes et antarctiques françaises" name_es="Tierras Australes y Antárticas Francesas"/>
+	<country tag="TG" name_en="Togo" name_fr="Togo" name_es="Togo"/>
+	<country tag="TH" name_en="Thailand" name_fr="Thaïlande" name_es="Tailandia"/>
+	<country tag="TK" name_en="Tokelau" name_fr="Tokelau" name_es="Tokelau"/>
+	<country tag="TL" name_en="Timor-Leste" name_fr="Timor oriental" name_es="Timor-Leste"/>
+	<country tag="TM" name_en="Turkmenistan" name_fr="Turkménistan" name_es="Turkmenistán"/>
+	<country tag="TN" name_en="Tunisia" name_fr="Tunisie" name_es="Túnez"/>
+	<country tag="TO" name_en="Tonga" name_fr="Tonga" name_es="Tonga"/>
+	<country tag="TR" name_en="Turkey" name_fr="Turquie" name_es="Turquía"/>
+	<country tag="TT" name_en="Trinidad and Tobago" name_fr="Trinité-et-Tobago" name_es="Trinidad y Tobago"/>
+	<country tag="TV" name_en="Tuvalu" name_fr="Tuvalu" name_es="Tuvalu"/>
+	<country tag="TW" name_en="Taiwan" name_fr="Taïwan" name_es="Taiwán"/>
+	<country tag="TZ" name_en="Tanzania" name_fr="Tanzanie" name_es="Tanzania"/>
+	<country tag="UA" name_en="Ukraine" name_fr="Ukraine" name_es="Ucrania"/>
+	<country tag="UG" name_en="Uganda" name_fr="Ouganda" name_es="Uganda"/>
+	<country tag="UM" name_en="United States Minor Outlying Islands" name_fr="Îles mineures éloignées des États-Unis" name_es="Islas menores alejadas de los Estados Unidos"/>
+	<country tag="US" name_en="United States" name_fr="États-Unis" name_es="Estados Unidos"/>
+	<country tag="UY" name_en="Uruguay" name_fr="Uruguay" name_es="Uruguay"/>
+	<country tag="UZ" name_en="Uzbekistan" name_fr="Ouzbékistan" name_es="Uzbekistán"/>
+	<country tag="VA" name_en="Vatican City" name_fr="Cité du Vatican" name_es="Ciudad del Vaticano"/>
+	<country tag="VC" name_en="Saint Vincent and the Grenadines" name_fr="Saint-Vincent-et-les-Grenadines" name_es="San Vicente y las Granadinas"/>
+	<country tag="VE" name_en="Venezuela" name_fr="Venezuela" name_es="Venezuela"/>
+	<country tag="VG" name_en="British Virgin Islands" name_fr="Îles Vierges britanniques" name_es="Islas Vírgenes Británicas"/>
+	<country tag="VI" name_en="United States Virgin Islands" name_fr="Îles Vierges des États-Unis" name_es="Islas Vírgenes de los Estados Unidos"/>
+	<country tag="VN" name_en="Vietnam" name_fr="Vietnam" name_es="Vietnam"/>
+	<country tag="VU" name_en="Vanuatu" name_fr="Vanuatu" name_es="Vanuatu"/>
+	<country tag="WF" name_en="Wallis and Futuna" name_fr="Wallis-et-Futuna" name_es="Wallis y Futuna"/>
+	<country tag="WS" name_en="Samoa" name_fr="Samoa" name_es="Samoa"/>
+	<country tag="XK" name_en="Kosovo" name_fr="Kosovo" name_es="Kosovo"/>
+	<country tag="YE" name_en="Yemen" name_fr="Yémen" name_es="Yemen"/>
+	<country tag="YT" name_en="Mayotte" name_fr="Mayotte" name_es="Mayotte"/>
+	<country tag="ZA" name_en="South Africa" name_fr="Afrique du Sud" name_es="Sudáfrica"/>
+	<country tag="ZM" name_en="Zambia" name_fr="Zambie" name_es="Zambia"/>
+	<country tag="ZW" name_en="Zimbabwe" name_fr="Zimbabwe" name_es="Zimbabue"/>
+</countries>
