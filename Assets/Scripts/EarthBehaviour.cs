@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class EarthBehaviour : MonoBehaviour
@@ -32,11 +33,16 @@ public class EarthBehaviour : MonoBehaviour
             rotationVelocity = Vector2.Lerp(rotationVelocity, Vector2.zero, velocity_factor * Time.deltaTime);
             RotateSphere(rotationVelocity);
         }
+
     }
 
     private void RotateSphere(Vector2 delta)
     {
+        Vector3 dragDirection = delta.normalized;
+
+        Vector3 rotationAxis = Vector3.Cross(dragDirection, Camera.main.transform.forward);
+
         // Multiply the rotation by Time.deltaTime to make it frame-rate independent
-        transform.rotation *= Quaternion.Euler(delta.y * Time.deltaTime, delta.x * Time.deltaTime, 0);
+        transform.Rotate(rotationAxis, delta.magnitude * Time.deltaTime, Space.World);
     }
 }
