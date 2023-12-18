@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class TerrainFace : MonoBehaviour
 {
-	Mesh mesh;
-	int resolution;
-	Vector3 localUp;
-	Vector3 axisA;
-	Vector3 axisB;
-	float radius;
+    Mesh mesh; 
+    int resolution;
+    Vector3 localUp;
+    Vector3 axisA;
+    Vector3 axisB;
+    float radius;
 
-	public TerrainFace(Mesh mesh, int resolution, Vector3 localUp, float radius)
-	{
-		this.mesh = mesh;
-		this.resolution = resolution;
-		this.localUp = localUp;
-		this.radius = radius;
+    public TerrainFace(Mesh mesh, int resolution, Vector3 localUp, float radius)
+    {
+        this.mesh = mesh;
+        this.resolution = resolution;
+        this.localUp = localUp;
+        this.radius = radius;
 
-		axisA = new Vector3(localUp.y, localUp.z, localUp.x);
-		axisB = Vector3.Cross(localUp, axisA);
-	}
+        axisA = new Vector3(localUp.y, localUp.z, localUp.x);
+        axisB = Vector3.Cross(localUp, axisA);
+
+        // Initialize the mesh object
+        this.mesh = new Mesh();
+        this.mesh.name = "TerrainMesh";
+    }
 
 	public void ConstructMesh()
 	{
@@ -60,63 +64,113 @@ public class TerrainFace : MonoBehaviour
 		mesh.uv = uv;
 	}
 
+	public void GenerateMeshFromJson(string jsonFilePath)
+    {
+        string jsonText = System.IO.File.ReadAllText(jsonFilePath);
+        PathData pathData = JsonUtility.FromJson<PathData>(jsonText);
+
+        int numPoints = pathData.path.Length;
+        Vector3[] vertices = new Vector3[numPoints];
+        int[] triangles = new int[(numPoints - 2) * 3];
+
+        for (int i = 0; i < numPoints; i++)
+        {
+            vertices[i] = pathData.path[i].ToVector3();
+        }
+
+        int vertexIndex = 0;
+        int triangleIndex = 0;
+
+        for (int i = 1; i < numPoints - 1; i++)
+        {
+            triangles[triangleIndex++] = 0;
+            triangles[triangleIndex++] = i;
+            triangles[triangleIndex++] = i + 1;
+        }
+
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+    }
+
+
 	public static Vector3 CubePointToSpherePoint(Vector3 p)
-		{
-			float x2 = p.x * p.x / 2;
-			float y2 = p.y * p.y / 2;
-			float z2 = p.z * p.z / 2;
-			float x = p.x * Mathf.Sqrt(1 - y2 - z2 + (p.y * p.y * p.z * p.z) / 3);
-			float y = p.y * Mathf.Sqrt(1 - z2 - x2 + (p.x * p.x * p.z * p.z) / 3);
-			float z = p.z * Mathf.Sqrt(1 - x2 - y2 + (p.x * p.x * p.y * p.y) / 3);
-			return new Vector3(x, y, z);
+	{
+		float x2 = p.x * p.x / 2;
+		float y2 = p.y * p.y / 2;
+		float z2 = p.z * p.z / 2;
+		float x = p.x * Mathf.Sqrt(1 - y2 - z2 + (p.y * p.y * p.z * p.z) / 3);
+		float y = p.y * Mathf.Sqrt(1 - z2 - x2 + (p.x * p.x * p.z * p.z) / 3);
+		float z = p.z * Mathf.Sqrt(1 - x2 - y2 + (p.x * p.x * p.y * p.y) / 3);
+		return new Vector3(x, y, z);
 
+	}
+
+	public static Vector3 SpherePointToCubePoint(Vector3 p)
+	{
+		float absX = Mathf.Abs(p.x);
+		float absY = Mathf.Abs(p.y);
+		float absZ = Mathf.Abs(p.z);
+
+		if (absY >= absX && absY >= absZ)
+		{
+			return CubifyFace(p);
+		}
+		else if (absX >= absY && absX >= absZ)
+		{
+			p = CubifyFace(new Vector3(p.y, p.x, p.z));
+			return new Vector3(p.y, p.x, p.z);
+		}
+		else
+		{
+			p = CubifyFace(new Vector3(p.x, p.z, p.y));
+			return new Vector3(p.x, p.z, p.y);
+		}
+	}
+
+	// Thanks to http://petrocket.blogspot.com/2010/04/sphere-to-cube-mapping.html
+	static Vector3 CubifyFace(Vector3 p)
+	{
+		const float inverseSqrt2 = 0.70710676908493042f;
+
+		float a2 = p.x * p.x * 2.0f;
+		float b2 = p.z * p.z * 2.0f;
+		float inner = -a2 + b2 - 3;
+		float innersqrt = -Mathf.Sqrt((inner * inner) - 12.0f * a2);
+
+		if (p.x != 0)
+		{
+			p.x = Mathf.Min(1, Mathf.Sqrt(innersqrt + a2 - b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.x);
 		}
 
-		public static Vector3 SpherePointToCubePoint(Vector3 p)
+		if (p.z != 0)
 		{
-			float absX = Mathf.Abs(p.x);
-			float absY = Mathf.Abs(p.y);
-			float absZ = Mathf.Abs(p.z);
-
-			if (absY >= absX && absY >= absZ)
-			{
-				return CubifyFace(p);
-			}
-			else if (absX >= absY && absX >= absZ)
-			{
-				p = CubifyFace(new Vector3(p.y, p.x, p.z));
-				return new Vector3(p.y, p.x, p.z);
-			}
-			else
-			{
-				p = CubifyFace(new Vector3(p.x, p.z, p.y));
-				return new Vector3(p.x, p.z, p.y);
-			}
+			p.z = Mathf.Min(1, Mathf.Sqrt(innersqrt - a2 + b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.z);
 		}
 
-		// Thanks to http://petrocket.blogspot.com/2010/04/sphere-to-cube-mapping.html
-		static Vector3 CubifyFace(Vector3 p)
+		// Top/bottom face
+		p.y = Mathf.Sign(p.y);
+
+		return p;
+	}
+
+	[System.Serializable]
+	public class PathData
+	{
+		public PointData[] path;
+
+		[System.Serializable]
+		public class PointData
 		{
-			const float inverseSqrt2 = 0.70710676908493042f;
+			public float x;
+			public float y;
+			public float z;
 
-			float a2 = p.x * p.x * 2.0f;
-			float b2 = p.z * p.z * 2.0f;
-			float inner = -a2 + b2 - 3;
-			float innersqrt = -Mathf.Sqrt((inner * inner) - 12.0f * a2);
-
-			if (p.x != 0)
+			public Vector3 ToVector3()
 			{
-				p.x = Mathf.Min(1, Mathf.Sqrt(innersqrt + a2 - b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.x);
+				return new Vector3(x, y, z);
 			}
-
-			if (p.z != 0)
-			{
-				p.z = Mathf.Min(1, Mathf.Sqrt(innersqrt - a2 + b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.z);
-			}
-
-			// Top/bottom face
-			p.y = Mathf.Sign(p.y);
-
-			return p;
 		}
+	}
 }
