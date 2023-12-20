@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void LOAD_SCENE()
     {
-        SceneManager.LoadScene("Levelselect");
+        SceneManager.LoadScene("Flag");
     }
 
     public void ExitGame()
