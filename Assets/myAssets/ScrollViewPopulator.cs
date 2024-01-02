@@ -15,10 +15,9 @@ public class ScrollViewPopulator : MonoBehaviour
     public GameObject textPrefab; // Le prefab de votre Text
     public Transform content; // Le Transform du contenu de votre ScrollView
     public Transform centerImageTransform; // Transform de l'image au centre du canvas
-    public int flagsToSelect; // Nombre de drapeaux � s�lectionner
-    public Button toggleButtonText; // Nouveau bouton pour activer/d�sactiver le texte
-
-
+    
+    private int numberOfFlags; // Nombre de drapeaux � s�lectionner
+    private bool showFlagNames; // Nouveau bouton pour activer/d�sactiver le texte
     private Image highlightedImage; // Image actuellement en surbrillance
     private List<Sprite> flags = new List<Sprite>(); // Liste des sprites charg�s depuis le dossier
     private List<int> usedIndices = new List<int>(); // Liste des indices d�j� utilis�s
@@ -27,6 +26,13 @@ public class ScrollViewPopulator : MonoBehaviour
 
     void Start()
     {
+
+        // Retrieve options from PlayerPrefs
+        numberOfFlags = PlayerPrefs.GetInt("NumberOfFlags", 10);
+        showFlagNames = PlayerPrefs.GetInt("ShowFlagNames", 0) == 1;
+
+        Debug.Log(showFlagNames);
+
         // Charger tous les sprites depuis le dossier sp�cifi�
         LoadSpritesFromFolder("Assets/myAssets/Flags");
 
@@ -36,7 +42,7 @@ public class ScrollViewPopulator : MonoBehaviour
         float yOffset = -50f; // Position initiale en y
         float totalWidth = 100f;
 
-        for (int i = 0; i < flagsToSelect; i++)
+        for (int i = 0; i < numberOfFlags; i++)
         {
             int randomIndex = GetUniqueRandomIndex();
 
@@ -99,8 +105,8 @@ public class ScrollViewPopulator : MonoBehaviour
             scrollRect.vertical = false;
         }
 
-        // Associer la m�thode ToggleTextVisibility au clic du bouton
-        toggleButtonText.onClick.AddListener(ToggleTextVisibility);
+        ToggleTextVisibility(showFlagNames);
+
     }
 
     // M�thode pour charger tous les sprites depuis un dossier
@@ -186,13 +192,14 @@ public class ScrollViewPopulator : MonoBehaviour
     }
 
 
-    void ToggleTextVisibility()
+    public void ToggleTextVisibility(bool isVisible)
     {
         foreach (Text textComponent in textComponents)
         {
-            textComponent.enabled = !textComponent.enabled; // Inverser l'�tat actuel de la visibilit� du texte
+            textComponent.enabled = isVisible; // Set the visibility based on the provided argument
         }
     }
+
 
     string GetCountryName(string tag)
     {
