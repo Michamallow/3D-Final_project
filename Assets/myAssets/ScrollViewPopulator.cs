@@ -15,19 +15,25 @@ public class ScrollViewPopulator : MonoBehaviour
     public GameObject textPrefab; // Le prefab de votre Text
     public Transform content; // Le Transform du contenu de votre ScrollView
     public Transform centerImageTransform; // Transform de l'image au centre du canvas
-    public int flagsToSelect; // Nombre de drapeaux à sélectionner
-    public Button toggleButtonText; // Nouveau bouton pour activer/désactiver le texte
-
-
+    
+    private int numberOfFlags; // Nombre de drapeaux ï¿½ sï¿½lectionner
+    private bool showFlagNames; // Nouveau bouton pour activer/dï¿½sactiver le texte
     private Image highlightedImage; // Image actuellement en surbrillance
-    private List<Sprite> flags = new List<Sprite>(); // Liste des sprites chargés depuis le dossier
-    private List<int> usedIndices = new List<int>(); // Liste des indices déjà utilisés
-    private List<Text> textComponents = new List<Text>(); // Liste des composants de texte créés
+    private List<Sprite> flags = new List<Sprite>(); // Liste des sprites chargï¿½s depuis le dossier
+    private List<int> usedIndices = new List<int>(); // Liste des indices dï¿½jï¿½ utilisï¿½s
+    private List<Text> textComponents = new List<Text>(); // Liste des composants de texte crï¿½ï¿½s
     private Dictionary<string, string> countryNames = new Dictionary<string, string>(); // Dictionnaire pour stocker les noms des pays
 
     void Start()
     {
-        // Charger tous les sprites depuis le dossier spécifié
+
+        // Retrieve options from PlayerPrefs
+        numberOfFlags = PlayerPrefs.GetInt("NumberOfFlags", 10);
+        showFlagNames = PlayerPrefs.GetInt("ShowFlagNames", 0) == 1;
+
+        Debug.Log(showFlagNames);
+
+        // Charger tous les sprites depuis le dossier spï¿½cifiï¿½
         LoadSpritesFromFolder("Assets/myAssets/Flags");
 
         // Charger les noms des pays depuis le fichier XML
@@ -36,7 +42,7 @@ public class ScrollViewPopulator : MonoBehaviour
         float yOffset = -50f; // Position initiale en y
         float totalWidth = 100f;
 
-        for (int i = 0; i < flagsToSelect; i++)
+        for (int i = 0; i < numberOfFlags; i++)
         {
             int randomIndex = GetUniqueRandomIndex();
 
@@ -46,7 +52,7 @@ public class ScrollViewPopulator : MonoBehaviour
             {
                 imageComponent.sprite = flags[randomIndex];
 
-                // Ajouter un gestionnaire d'événements de clic à l'image
+                // Ajouter un gestionnaire d'ï¿½vï¿½nements de clic ï¿½ l'image
                 EventTrigger trigger = imageGO.AddComponent<EventTrigger>();
                 EventTrigger.Entry entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerClick;
@@ -57,13 +63,16 @@ public class ScrollViewPopulator : MonoBehaviour
                 RectTransform rectTransform = imageGO.GetComponent<RectTransform>();
                 rectTransform.anchoredPosition = new Vector2(totalWidth, yOffset);
 
-                // Définir l'ancrage sur le coin supérieur gauche
+                // Dï¿½finir l'ancrage sur le coin supï¿½rieur gauche
                 rectTransform.anchorMin = new Vector2(0, 1);
                 rectTransform.anchorMax = new Vector2(0, 1);
 
-                // Créer un objet de texte pour afficher le nom de l'image au-dessus de l'image
+                // Crï¿½er un objet de texte pour afficher le nom de l'image au-dessus de l'image
                 GameObject textGO = Instantiate(textPrefab, content);
                 Text textComponent = textGO.GetComponent<Text>();
+                
+                DragAndDrop dragAndDropScript = imageGO.AddComponent<DragAndDrop>();
+
 
                 if (textComponent != null)
                 {
@@ -76,12 +85,12 @@ public class ScrollViewPopulator : MonoBehaviour
                     textComponent.rectTransform.anchorMin = new Vector2(0, 1);
                     textComponent.rectTransform.anchorMax = new Vector2(0, 1);
 
-                    // Ajouter le composant de texte à la liste
+                    // Ajouter le composant de texte ï¿½ la liste
                     textComponents.Add(textComponent);
                 }
 
-                // Mettre à jour la position pour le prochain drapeau
-                totalWidth += rectTransform.rect.width + 10; // Utilisez la largeur du RectTransform comme décalage
+                // Mettre ï¿½ jour la position pour le prochain drapeau
+                totalWidth += rectTransform.rect.width + 10; // Utilisez la largeur du RectTransform comme dï¿½calage
             }
         }
 
@@ -89,18 +98,18 @@ public class ScrollViewPopulator : MonoBehaviour
         RectTransform contentRectTransform = content.GetComponent<RectTransform>();
         contentRectTransform.sizeDelta = new Vector2(totalWidth, contentRectTransform.sizeDelta.y);
 
-        // Désactiver le défilement vers le bas
+        // Dï¿½sactiver le dï¿½filement vers le bas
         ScrollRect scrollRect = content.parent.GetComponent<ScrollRect>();
         if (scrollRect != null)
         {
             scrollRect.vertical = false;
         }
 
-        // Associer la méthode ToggleTextVisibility au clic du bouton
-        toggleButtonText.onClick.AddListener(ToggleTextVisibility);
+        ToggleTextVisibility(showFlagNames);
+
     }
 
-    // Méthode pour charger tous les sprites depuis un dossier
+    // Mï¿½thode pour charger tous les sprites depuis un dossier
     void LoadSpritesFromFolder(string folderPath)
     {
 #if UNITY_EDITOR
@@ -119,7 +128,7 @@ public class ScrollViewPopulator : MonoBehaviour
 #endif
     }
 
-    // Méthode pour obtenir un indice aléatoire non utilisé
+    // Mï¿½thode pour obtenir un indice alï¿½atoire non utilisï¿½
     int GetUniqueRandomIndex()
     {
         int maxIndex = flags.Count;
@@ -140,19 +149,19 @@ public class ScrollViewPopulator : MonoBehaviour
         return randomIndex;
     }
 
-    // Méthode appelée lorsqu'une image est cliquée
+    // Mï¿½thode appelï¿½e lorsqu'une image est cliquï¿½e
     void OnImageClicked(Image clickedImage)
     {
-        // Réinitialiser la couleur de l'image précédemment en surbrillance (si elle existe)
+        // Rï¿½initialiser la couleur de l'image prï¿½cï¿½demment en surbrillance (si elle existe)
         if (highlightedImage != null)
         {
-            highlightedImage.color = Color.white; // Remettez la couleur à celle d'origine (ou une autre couleur de votre choix)
+            highlightedImage.color = Color.white; // Remettez la couleur ï¿½ celle d'origine (ou une autre couleur de votre choix)
         }
 
         // Mettre en surbrillance la nouvelle image
         clickedImage.color = Color.black;
 
-        // Mettez à jour l'image actuellement en surbrillance
+        // Mettez ï¿½ jour l'image actuellement en surbrillance
         highlightedImage = clickedImage;
 
         // Afficher l'image au centre du canvas
@@ -183,13 +192,14 @@ public class ScrollViewPopulator : MonoBehaviour
     }
 
 
-    void ToggleTextVisibility()
+    public void ToggleTextVisibility(bool isVisible)
     {
         foreach (Text textComponent in textComponents)
         {
-            textComponent.enabled = !textComponent.enabled; // Inverser l'état actuel de la visibilité du texte
+            textComponent.enabled = isVisible; // Set the visibility based on the provided argument
         }
     }
+
 
     string GetCountryName(string tag)
     {
