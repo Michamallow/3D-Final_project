@@ -20,7 +20,8 @@ public class Planet : MonoBehaviour
 	TerrainFace[] terrainFaces;
 	private Material originalMaterial;
     private Material highlightMaterial;
-
+	
+	
 	void Start()
     {
         InitializeMaterials();
