@@ -39,8 +39,8 @@ public class ScrollViewPopulator : MonoBehaviour
         // Charger les noms des pays depuis le fichier XML
         LoadCountryNamesFromXML("Assets/myAssets/countries.xml");
 
-        float yOffset = -50f; // Position initiale en y
-        float totalWidth = 100f;
+        float xOffset = -50f; // Position initiale en y
+        float totalHeight = 100f;
 
         for (int i = 0; i < numberOfFlags; i++)
         {
@@ -59,13 +59,14 @@ public class ScrollViewPopulator : MonoBehaviour
                 entry.callback.AddListener((data) => { OnImageClicked(imageComponent); });
                 trigger.triggers.Add(entry);
 
+                var currTransform = GetComponent<RectTransform>();
                 // Ajuster la position en y
                 RectTransform rectTransform = imageGO.GetComponent<RectTransform>();
-                rectTransform.anchoredPosition = new Vector2(totalWidth, yOffset);
+                //rectTransform.anchoredPosition = new Vector2(currTransform.sizeDelta.x, currTransform.sizeDelta.x);
 
                 // D�finir l'ancrage sur le coin sup�rieur gauche
-                rectTransform.anchorMin = new Vector2(0, 1);
-                rectTransform.anchorMax = new Vector2(0, 1);
+                rectTransform.anchorMin = new Vector2(1, 1);
+                rectTransform.anchorMax = new Vector2(1, 1);
 
                 // Cr�er un objet de texte pour afficher le nom de l'image au-dessus de l'image
                 GameObject textGO = Instantiate(textPrefab, content);
@@ -80,7 +81,7 @@ public class ScrollViewPopulator : MonoBehaviour
                     string countryName = GetCountryName(flags[randomIndex].name.ToUpper());
                     textComponent.text = countryName;
 
-                    textComponent.rectTransform.anchoredPosition = new Vector2(totalWidth, -145 + 30f); // Ajustez la position du texte au-dessus de l'image
+                    textComponent.rectTransform.anchoredPosition = new Vector2(totalHeight, -145 + 30f); // Ajustez la position du texte au-dessus de l'image
 
                     textComponent.rectTransform.anchorMin = new Vector2(0, 1);
                     textComponent.rectTransform.anchorMax = new Vector2(0, 1);
@@ -90,13 +91,13 @@ public class ScrollViewPopulator : MonoBehaviour
                 }
 
                 // Mettre � jour la position pour le prochain drapeau
-                totalWidth += rectTransform.rect.width + 10; // Utilisez la largeur du RectTransform comme d�calage
+                totalHeight += rectTransform.rect.height + 10; // Utilisez la largeur du RectTransform comme d�calage
             }
         }
 
         // Ajuster la largeur du content en fonction de la largeur totale
         RectTransform contentRectTransform = content.GetComponent<RectTransform>();
-        contentRectTransform.sizeDelta = new Vector2(totalWidth, contentRectTransform.sizeDelta.y);
+        contentRectTransform.sizeDelta = new Vector2(contentRectTransform.sizeDelta.x, totalHeight);
 
         // D�sactiver le d�filement vers le bas
         ScrollRect scrollRect = content.parent.GetComponent<ScrollRect>();
