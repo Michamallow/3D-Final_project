@@ -26,21 +26,20 @@ public class ScrollViewPopulator : MonoBehaviour
 
     void Start()
     {
-
         // Retrieve options from PlayerPrefs
         numberOfFlags = PlayerPrefs.GetInt("NumberOfFlags", 10);
         showFlagNames = PlayerPrefs.GetInt("ShowFlagNames", 0) == 1;
 
         Debug.Log(showFlagNames);
 
-        // Charger tous les sprites depuis le dossier sp�cifi�
+        // Charger tous les sprites depuis le dossier spécifié
         LoadSpritesFromFolder("Assets/myAssets/Flags");
 
         // Charger les noms des pays depuis le fichier XML
         LoadCountryNamesFromXML("Assets/myAssets/countries.xml");
 
-        float xOffset = -50f; // Position initiale en y
-        float totalHeight = 100f;
+        float xOffset = 100f; // Position initiale en x
+        float totalHeight = 80f; // Hauteur totale mise à jour
 
         for (int i = 0; i < numberOfFlags; i++)
         {
@@ -52,54 +51,52 @@ public class ScrollViewPopulator : MonoBehaviour
             {
                 imageComponent.sprite = flags[randomIndex];
 
-                // Ajouter un gestionnaire d'�v�nements de clic � l'image
+                // Ajouter un gestionnaire d'événements de clic à l'image
                 EventTrigger trigger = imageGO.AddComponent<EventTrigger>();
                 EventTrigger.Entry entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerClick;
                 entry.callback.AddListener((data) => { OnImageClicked(imageComponent); });
                 trigger.triggers.Add(entry);
 
-                var currTransform = GetComponent<RectTransform>();
-                // Ajuster la position en y
+                // Ajuster la position en x
                 RectTransform rectTransform = imageGO.GetComponent<RectTransform>();
-                //rectTransform.anchoredPosition = new Vector2(currTransform.sizeDelta.x, currTransform.sizeDelta.x);
+                rectTransform.anchoredPosition = new Vector2(xOffset, -totalHeight);
 
-                // D�finir l'ancrage sur le coin sup�rieur gauche
-                rectTransform.anchorMin = new Vector2(1, 1);
-                rectTransform.anchorMax = new Vector2(1, 1);
+                // Définir l'ancrage sur le coin supérieur gauche
+                rectTransform.anchorMin = new Vector2(0, 1);
+                rectTransform.anchorMax = new Vector2(0, 1);
 
-                // Cr�er un objet de texte pour afficher le nom de l'image au-dessus de l'image
+                // Créer un objet de texte pour afficher le nom de l'image au-dessus de l'image
                 GameObject textGO = Instantiate(textPrefab, content);
                 Text textComponent = textGO.GetComponent<Text>();
                 
                 DragAndDrop dragAndDropScript = imageGO.AddComponent<DragAndDrop>();
 
-
                 if (textComponent != null)
                 {
-                    // Utilisez la fonction GetCountryName pour obtenir le nom du pays
+                    // Utiliser la fonction GetCountryName pour obtenir le nom du pays
                     string countryName = GetCountryName(flags[randomIndex].name.ToUpper());
                     textComponent.text = countryName;
 
-                    textComponent.rectTransform.anchoredPosition = new Vector2(totalHeight, -145 + 30f); // Ajustez la position du texte au-dessus de l'image
+                    textComponent.rectTransform.anchoredPosition = new Vector2(xOffset, -totalHeight + 65f); // Ajuster la position du texte au-dessus de l'image
 
                     textComponent.rectTransform.anchorMin = new Vector2(0, 1);
                     textComponent.rectTransform.anchorMax = new Vector2(0, 1);
 
-                    // Ajouter le composant de texte � la liste
+                    // Ajouter le composant de texte à la liste
                     textComponents.Add(textComponent);
                 }
 
-                // Mettre � jour la position pour le prochain drapeau
-                totalHeight += rectTransform.rect.height + 10; // Utilisez la largeur du RectTransform comme d�calage
+                // Mettre à jour la position pour le prochain drapeau
+                totalHeight += rectTransform.rect.height + 30; // Utiliser la hauteur du RectTransform comme décalage
             }
         }
 
-        // Ajuster la largeur du content en fonction de la largeur totale
+        // Ajuster la hauteur du content en fonction de la hauteur totale
         RectTransform contentRectTransform = content.GetComponent<RectTransform>();
         contentRectTransform.sizeDelta = new Vector2(contentRectTransform.sizeDelta.x, totalHeight);
 
-        // D�sactiver le d�filement vers le bas
+        // Désactiver le défilement vers le bas
         ScrollRect scrollRect = content.parent.GetComponent<ScrollRect>();
         if (scrollRect != null)
         {
@@ -107,7 +104,6 @@ public class ScrollViewPopulator : MonoBehaviour
         }
 
         ToggleTextVisibility(showFlagNames);
-
     }
 
     // M�thode pour charger tous les sprites depuis un dossier
