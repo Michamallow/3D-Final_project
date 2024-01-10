@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
 
 public class Planet : MonoBehaviour
 {
@@ -34,6 +38,60 @@ public class Planet : MonoBehaviour
     private void OnValidate() {
 		Initialize();
 		GenerateMesh();
+
+		// Parse countries.xml
+		var xmlDocument = XDocument.Load("Assets/countries.xml");
+		var xmlCountries = xmlDocument.Descendants("country").Select(x => x.Attribute("name_en").Value).ToList(); 
+		//print(xmlCountries.Count); //253
+
+		// Parse Countries (medium res).txt
+		var jsonText = File.ReadAllText("Assets/myAssets/Countries (medium res).txt");
+		var jsonDocument = JObject.Parse(jsonText);
+		var jsonCountries = jsonDocument["features"].Children().ToList();
+		//print(jsonCountries.Count); //241
+
+		var i=0;
+		foreach (var xmlCountry in xmlCountries)
+		{
+			i++;
+			var jsonCountry = jsonCountries.FirstOrDefault(jc => jc["properties"]["NAME"].Value<string>() == xmlCountry);
+			if (jsonCountry != null)
+			{
+				print(i + " " + xmlCountry); 
+				
+				if(jsonCountry["geometry"]["type"].Value<string>() == "MultiPolygon")
+				{
+					print("MultiPolygon");
+					var coordinates = jsonCountry["geometry"]["coordinates"]
+					.Select(polygon => polygon.Children() // Get the second level (array of coordinates)
+						.Children() // Get the first level (array of polygons)
+						.Select(coordinate => coordinate.Values<double>().ToList())
+						.ToList())
+    				.ToList();
+
+					/*foreach (var polygon in coordinates)
+					{
+						print("New Polygon:" + polygon.Count); 
+						foreach (var coordinate in polygon) 
+						{
+							print($"Longitude: {coordinate[0]}, Latitude: {coordinate[1]}");
+						}
+					}*/
+				}else{
+					print("Polygon");
+					var coordinates = jsonCountry["geometry"]["coordinates"]
+					.Children() // Get the first level (array of polygons)
+					.Children() // Get the second level (array of coordinates)
+					.Select(coordinate => coordinate.Values<double>().ToList())
+    				.ToList();
+
+					/*foreach (var coordinate in coordinates)
+					{
+						print($"Longitude: {coordinate[0]}, Latitude: {coordinate[1]}");
+					}*/
+				}
+			} 
+		}
 	}
 
 	void Initialize()
