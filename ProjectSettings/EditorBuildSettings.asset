@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Flag.unity
     guid: 0de5134affc24bf4e9964ff739ee2e51
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: aad7fc0e8dfd6e14b9618f44ea575bfd, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 56d1fcf28d9eb4243a54c9b30b0e015e, type: 2}
