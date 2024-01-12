@@ -6,20 +6,20 @@ public class TerrainFace : MonoBehaviour
 {
 	Mesh mesh;
 	int resolution;
-	Vector3 localUp;
-	Vector3 axisA;
-	Vector3 axisB;
+	List<Vector2> coords;
+	//Vector3 axisA;
+	//Vector3 axisB;
 	float radius;
 
-	public TerrainFace(Mesh mesh, int resolution, Vector3 localUp, float radius)
+	public TerrainFace(Mesh mesh, int resolution, List<Vector2> coords, float radius)
 	{
 		this.mesh = mesh;
 		this.resolution = resolution;
-		this.localUp = localUp;
+		this.coords = coords;
 		this.radius = radius;
 
-		axisA = new Vector3(localUp.y, localUp.z, localUp.x);
-		axisB = Vector3.Cross(localUp, axisA);
+		//axisA = new Vector3(coords.y, coords.z, coords.x);
+		//axisB = Vector3.Cross(coords, axisA);
 	}
 
 	public void ConstructMesh()
@@ -35,7 +35,7 @@ public class TerrainFace : MonoBehaviour
 			{
 				int i = x + y * resolution;
 				Vector2 percent = new Vector2(x, y) / (resolution - 1);
-				Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
+				Vector3 pointOnUnitCube = coords; //+ (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
 				Vector3 pointOnUnitSphere = CubePointToSpherePoint(pointOnUnitCube);
 				vertices[i] = pointOnUnitSphere * radius;
 

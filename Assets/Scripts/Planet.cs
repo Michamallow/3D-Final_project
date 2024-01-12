@@ -23,109 +23,104 @@ public class Planet : MonoBehaviour
 	MeshFilter[] meshFilters;
 	TerrainFace[] terrainFaces;
 	private Material originalMaterial;
-    private Material highlightMaterial;
-	
-	
+	private Material highlightMaterial;
+
+
 	void Start()
-    {
-        InitializeMaterials();
-    }
+	{
+		InitializeMaterials();
+	}
 
-	void FixedUpdate() {
-        HighlightLookedAtFace();
-    }
+	void FixedUpdate()
+	{
+		HighlightLookedAtFace();
+	}
 
-    private void OnValidate() {
+	private void OnValidate()
+	{
 		Initialize();
 		GenerateMesh();
-
-		// Parse countries.xml
-		var xmlDocument = XDocument.Load("Assets/countries.xml");
-		var xmlCountries = xmlDocument.Descendants("country").Select(x => x.Attribute("name_en").Value).ToList(); 
-		//print(xmlCountries.Count); //253
-
-		// Parse Countries (medium res).txt
-		var jsonText = File.ReadAllText("Assets/myAssets/Countries (medium res).txt");
-		var jsonDocument = JObject.Parse(jsonText);
-		var jsonCountries = jsonDocument["features"].Children().ToList();
-		//print(jsonCountries.Count); //241
-
-		var i=0;
-		foreach (var xmlCountry in xmlCountries)
-		{
-			i++;
-			var jsonCountry = jsonCountries.FirstOrDefault(jc => jc["properties"]["NAME"].Value<string>() == xmlCountry);
-			if (jsonCountry != null)
-			{
-				print(i + " " + xmlCountry); 
-				
-				if(jsonCountry["geometry"]["type"].Value<string>() == "MultiPolygon")
-				{
-					print("MultiPolygon");
-					var coordinates = jsonCountry["geometry"]["coordinates"]
-					.Select(polygon => polygon.Children() // Get the second level (array of coordinates)
-						.Children() // Get the first level (array of polygons)
-						.Select(coordinate => coordinate.Values<double>().ToList())
-						.ToList())
-    				.ToList();
-
-					/*foreach (var polygon in coordinates)
-					{
-						print("New Polygon:" + polygon.Count); 
-						foreach (var coordinate in polygon) 
-						{
-							print($"Longitude: {coordinate[0]}, Latitude: {coordinate[1]}");
-						}
-					}*/
-				}else{
-					print("Polygon");
-					var coordinates = jsonCountry["geometry"]["coordinates"]
-					.Children() // Get the first level (array of polygons)
-					.Children() // Get the second level (array of coordinates)
-					.Select(coordinate => coordinate.Values<double>().ToList())
-    				.ToList();
-
-					/*foreach (var coordinate in coordinates)
-					{
-						print($"Longitude: {coordinate[0]}, Latitude: {coordinate[1]}");
-					}*/
-				}
-			} 
-		}
 	}
 
 	void Initialize()
 	{
 		this.tag = "Planet";
 
-		if(shapeSettings == null)
+		if (shapeSettings == null)
 		{
 			shapeSettings = Resources.Load<ShapeSettings>("Settings/Shape");
 
 			if (shapeSettings == null)
-            {
-                Debug.LogError("ShapeSettings not found. Make sure it exists at 'Assets/Resources/Settings/Shape'");
-            }
+			{
+				Debug.LogError("ShapeSettings not found. Make sure it exists at 'Assets/Resources/Settings/Shape'");
+			}
 		}
 
-		if(camObj == null)
+		if (camObj == null)
 		{
 			camObj = Camera.main.gameObject;
 		}
-		
+
+		// Parse countries.xml
+		var xmlDocument = XDocument.Load("Assets/countries.xml");
+		var xmlCountries = xmlDocument.Descendants("country").Select(x => x.Attribute("name_en").Value).ToList();
+
+		// Parse Countries (medium res).txt
+		var jsonText = File.ReadAllText("Assets/myAssets/Countries (medium res).txt");
+		var jsonDocument = JObject.Parse(jsonText);
+		var jsonCountries = jsonDocument["features"].Children().ToList();
+
+		Dictionary<string, List<Vector2>> countries = new Dictionary<string, List<Vector2>>();
+		foreach (var xmlCountry in xmlCountries)
+		{
+			var jsonCountry = jsonCountries.FirstOrDefault(jc => jc["properties"]["NAME"].Value<string>() == xmlCountry);
+			if (jsonCountry != null)
+			{
+				if (jsonCountry["geometry"]["type"].Value<string>() == "MultiPolygon")
+				{
+					var coordinates = jsonCountry["geometry"]["coordinates"]
+					.Select(polygon => polygon.Children() // Get the second level (array of coordinates)
+						.Children() // Get the first level (array of polygons)
+						.Select(coordinate => coordinate.Values<float>().ToList())
+						.ToList())
+					.ToList();
+
+					var numPolygon = 0;
+					foreach (var polygon in coordinates)
+					{
+						numPolygon++;
+						List<Vector2> coordTuple = polygon.Select(coord => new Vector2(coord[0], coord[1])).ToList();
+						countries.Add(xmlCountry + numPolygon.ToString(), coordTuple);
+					}
+				}
+				else
+				{
+					var coordinates = jsonCountry["geometry"]["coordinates"]
+					.Children() // Get the first level (array of polygons)
+					.Children() // Get the second level (array of coordinates)
+					.Select(coordinate => coordinate.Values<float>().ToList())
+					.ToList();
+
+					List<Vector2> coordTuple = coordinates.Select(coord => new Vector2(coord[0], coord[1])).ToList();
+					countries.Add(xmlCountry, coordTuple);
+				}
+			}
+		}
+
 		if (meshFilters == null || meshFilters.Length == 0)
 		{
-			meshFilters = new MeshFilter[6];
+			meshFilters = new MeshFilter[countries.Count]; 
 		}
-		terrainFaces = new TerrainFace[6];
+		terrainFaces = new TerrainFace[countries.Count];
 
-		Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+		string countryName;
+		int i = 0;
+		foreach(KeyValuePair<string, List<Vector2>> country in countries){
+			countryName = country.Key;
+			// TODO : How to put MultiPolygon as a single country?
 
-		for (int i = 0; i < 6; i++)
-		{
-			if (meshFilters[i] == null)
-			{
-				GameObject meshObj = new GameObject("mesh");
+			if (meshFilters[i] == null){
+				GameObject meshObj = new GameObject(countryName);
 				meshObj.transform.parent = transform;
 
 				// Add MeshRenderer
@@ -140,21 +135,20 @@ public class Planet : MonoBehaviour
 				MeshCollider meshCollider = meshObj.AddComponent<MeshCollider>();
 				meshCollider.convex = true;
 				meshCollider.isTrigger = true;
-				meshCollider.providesContacts = true;
+				meshCollider.providesContacts = true; 
 			}
 
-			terrainFaces[i] = new TerrainFace(meshFilters[i].sharedMesh, resolution, directions[i], shapeSettings.planetRadius);
-			bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
-			meshFilters[i].gameObject.SetActive(renderFace);
+			terrainFaces[i] = new TerrainFace(meshFilters[i].sharedMesh, resolution, country.Value, shapeSettings.planetRadius); 
+			i++;
 		}
 	}
 
 	private void InitializeMaterials()
-    {
-        originalMaterial = Resources.Load<Material>("Earth");
-        highlightMaterial = new Material(Shader.Find("Standard"));
-        highlightMaterial.color = Color.yellow;
-    }
+	{
+		originalMaterial = Resources.Load<Material>("Earth");
+		highlightMaterial = new Material(Shader.Find("Standard"));
+		highlightMaterial.color = Color.yellow;
+	}
 
 	public void OnShapeSettingsUpdated()
 	{
@@ -164,7 +158,7 @@ public class Planet : MonoBehaviour
 
 	void GenerateMesh()
 	{
-		for(int i = 0; i < 6; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			if (meshFilters[i].gameObject.activeSelf)
 			{
@@ -190,7 +184,7 @@ public class Planet : MonoBehaviour
 		}
 
 		Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-		
+
 		// Draw the ray in the Scene view
 		Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
@@ -203,23 +197,26 @@ public class Planet : MonoBehaviour
 				// Highlight the face by passing the hit object's transform
 				HighlightFace(hit.transform);
 			}
-		}else{
+		}
+		else
+		{
 			// Reset all materials to originalMaterial
 			HighlightFace(null);
 		}
 	}
 
-    private void HighlightFace(Transform hitTransform)
-    {
-        // Reset all materials to originalMaterial
-        foreach (var meshFilter in meshFilters)
-        {
-            meshFilter.GetComponent<MeshRenderer>().material = originalMaterial;
-        }
+	private void HighlightFace(Transform hitTransform)
+	{
+		// Reset all materials to originalMaterial
+		foreach (var meshFilter in meshFilters)
+		{
+			meshFilter.GetComponent<MeshRenderer>().material = originalMaterial;
+		}
 
 		// Highlight the specific face
-		if (hitTransform != null){
+		if (hitTransform != null)
+		{
 			hitTransform.GetComponent<MeshRenderer>().material = highlightMaterial;
 		}
-    }
+	}
 }
