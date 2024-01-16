@@ -14,7 +14,6 @@ public class ScrollViewPopulator : MonoBehaviour
     public GameObject imagePrefab; // Le prefab de votre Image
     public GameObject textPrefab; // Le prefab de votre Text
     public Transform content; // Le Transform du contenu de votre ScrollView
-    public Transform centerImageTransform; // Transform de l'image au centre du canvas
     
     private int numberOfFlags; // Nombre de drapeaux � s�lectionner
     private bool showFlagNames; // Nouveau bouton pour activer/d�sactiver le texte
@@ -78,10 +77,7 @@ public class ScrollViewPopulator : MonoBehaviour
                     string countryName = GetCountryName(flags[randomIndex].name.ToUpper());
                     textComponent.text = countryName;
 
-                    textComponent.rectTransform.anchoredPosition = new Vector2(xOffset, -totalHeight + 65f); // Ajuster la position du texte au-dessus de l'image
-
-                    textComponent.rectTransform.anchorMin = new Vector2(0, 1);
-                    textComponent.rectTransform.anchorMax = new Vector2(0, 1);
+                    textComponent.rectTransform.anchoredPosition = new Vector2(textComponent.rectTransform.anchoredPosition.x, - totalHeight - 80); // Ajuster la position du texte au-dessus de l'image
 
                     // Ajouter le composant de texte à la liste
                     textComponents.Add(textComponent);
@@ -100,7 +96,7 @@ public class ScrollViewPopulator : MonoBehaviour
         ScrollRect scrollRect = content.parent.GetComponent<ScrollRect>();
         if (scrollRect != null)
         {
-            scrollRect.vertical = false;
+            scrollRect.horizontal = false;
         }
 
         ToggleTextVisibility(showFlagNames);
@@ -160,9 +156,6 @@ public class ScrollViewPopulator : MonoBehaviour
 
         // Mettez � jour l'image actuellement en surbrillance
         highlightedImage = clickedImage;
-
-        // Afficher l'image au centre du canvas
-        centerImageTransform.GetComponent<Image>().sprite = clickedImage.sprite;
     }
 
     void LoadCountryNamesFromXML(string xmlFilePath)
