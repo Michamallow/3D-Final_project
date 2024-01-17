@@ -15,7 +15,7 @@ public class SettingMenu : MonoBehaviour
         if (setting == null)
         {
 
-            DontDestroyOnLoad(this.gameObject);
+            // DontDestroyOnLoad(this.gameObject);
             setting = this;
         }
         else if (setting != this)
