@@ -147,7 +147,7 @@ public class Planet : MonoBehaviour
 	{
 		originalMaterial = Resources.Load<Material>("Earth");
 		highlightMaterial = new Material(Shader.Find("Standard"));
-		highlightMaterial.color = Color.yellow;
+		highlightMaterial.color = Color.yellow; 
 	}
 
 	public void OnShapeSettingsUpdated()

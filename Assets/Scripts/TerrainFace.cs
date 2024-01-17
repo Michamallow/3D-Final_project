@@ -139,7 +139,7 @@ public class TerrainFace : MonoBehaviour
 			Vector3 sphereVertex = SphericalToCartesian(c, radius);
 			sphereVertices.Add(sphereVertex);
 
-			//Debug.Log("Transformed Coord: " + sphereVertex);
+			//Debug.Log("Transformed Coord: " + sphereVertex); 
 		}
 
 		return sphereVertices;
