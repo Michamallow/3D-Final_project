@@ -2,6 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class PointComparer : IComparer<Vector3>
+{
+    private Vector3 referencePoint;
+
+    public PointComparer(Vector3 reference)
+    {
+        referencePoint = reference;
+    }
+
+    public int Compare(Vector3 a, Vector3 b)
+    {
+        float angleA = Mathf.Atan2(a.y - referencePoint.y, a.x - referencePoint.x);
+        float angleB = Mathf.Atan2(b.y - referencePoint.y, b.x - referencePoint.x);
+
+        if (angleA < angleB)
+            return -1;
+        if (angleA > angleB)
+            return 1;
+        return 0;
+    }
+}
+
 public class TerrainFace : MonoBehaviour
 {
 	Mesh mesh;
@@ -10,6 +32,7 @@ public class TerrainFace : MonoBehaviour
 	//Vector3 axisA;
 	//Vector3 axisB;
 	float radius;
+	List<Vector3> vertices;
 
 	public TerrainFace(Mesh mesh, int resolution, List<Vector2> coords, float radius)
 	{
@@ -24,99 +47,99 @@ public class TerrainFace : MonoBehaviour
 
 	public void ConstructMesh()
 	{
-		Vector3[] vertices = new Vector3[resolution * resolution];
-		int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
-		int triIndex = 0;
-		Vector2[] uv = (mesh.uv.Length == vertices.Length) ? mesh.uv : new Vector2[vertices.Length];
+		// Convertir les coordonnées du plan 2D à des coordonnées sphériques
+		List<Vector3> sphereVertices = ConvertToSphereCoordinates(coords);
 
-		for (int y = 0; y < resolution; y++)
-		{
-			for (int x = 0; x < resolution; x++)
-			{
-				int i = x + y * resolution;
-				Vector2 percent = new Vector2(x, y) / (resolution - 1);
-				Vector3 pointOnUnitCube = coords; //+ (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
-				Vector3 pointOnUnitSphere = CubePointToSpherePoint(pointOnUnitCube);
-				vertices[i] = pointOnUnitSphere * radius;
+		// Trouver un point de référence (par exemple, le centroïde)
+		Vector3 referencePoint = FindReferencePoint(sphereVertices);
 
-				if (x != resolution - 1 && y != resolution - 1)
-				{
-					triangles[triIndex] = i;
-					triangles[triIndex + 1] = i + resolution + 1;
-					triangles[triIndex + 2] = i + resolution;
+		// Trier les vertices en fonction de l'angle polaire
+		sphereVertices.Sort(new PointComparer(referencePoint));
 
-					triangles[triIndex + 3] = i;
-					triangles[triIndex + 4] = i + 1;
-					triangles[triIndex + 5] = i + resolution + 1;
-					triIndex += 6;
-				}
-			}
-		}
+		// Trianguler les vertices pour créer des faces
+		List<int> triangles = Triangulate(sphereVertices.Count);
 
+		// Assigner les vertices et les triangles au mesh
 		mesh.Clear();
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
-		mesh.RecalculateNormals();
-		mesh.uv = uv;
+		mesh.vertices = sphereVertices.ToArray();
+		mesh.triangles = triangles.ToArray();
+		//mesh.RecalculateNormals();
 	}
 
-	public static Vector3 CubePointToSpherePoint(Vector3 p)
-		{
-			float x2 = p.x * p.x / 2;
-			float y2 = p.y * p.y / 2;
-			float z2 = p.z * p.z / 2;
-			float x = p.x * Mathf.Sqrt(1 - y2 - z2 + (p.y * p.y * p.z * p.z) / 3);
-			float y = p.y * Mathf.Sqrt(1 - z2 - x2 + (p.x * p.x * p.z * p.z) / 3);
-			float z = p.z * Mathf.Sqrt(1 - x2 - y2 + (p.x * p.x * p.y * p.y) / 3);
-			return new Vector3(x, y, z);
+	
 
+	void OnDrawGizmos()
+    {
+        if (vertices != null)
+        {
+            Gizmos.color = Color.red;
+            foreach (var vertex in vertices)
+            {
+                Gizmos.DrawSphere(vertex, 0.1f);
+            }
+        }
+    }
+
+	private Vector3 FindReferencePoint(List<Vector3> points)
+	{
+		// You can choose any point as a reference. Here, we use the centroid.
+		float sumX = 0f;
+		float sumY = 0f;
+		float sumZ = 0f;
+
+		foreach (Vector3 point in points)
+		{
+			sumX += point.x;
+			sumY += point.y;
+			sumZ += point.z;
 		}
 
-		public static Vector3 SpherePointToCubePoint(Vector3 p)
-		{
-			float absX = Mathf.Abs(p.x);
-			float absY = Mathf.Abs(p.y);
-			float absZ = Mathf.Abs(p.z);
+		float centerX = sumX / points.Count;
+		float centerY = sumY / points.Count;
+		float centerZ = sumZ / points.Count;
 
-			if (absY >= absX && absY >= absZ)
-			{
-				return CubifyFace(p);
-			}
-			else if (absX >= absY && absX >= absZ)
-			{
-				p = CubifyFace(new Vector3(p.y, p.x, p.z));
-				return new Vector3(p.y, p.x, p.z);
-			}
-			else
-			{
-				p = CubifyFace(new Vector3(p.x, p.z, p.y));
-				return new Vector3(p.x, p.z, p.y);
-			}
+		return new Vector3(centerX, centerY, centerZ);
+	}
+
+	// Triangulation function for a convex polygon
+	List<int> Triangulate(int vertexCount)
+	{
+		List<int> triangles = new List<int>();
+
+		for (int i = 1; i < vertexCount - 1; i++)
+		{
+			triangles.Add(0);
+			triangles.Add(i);
+			triangles.Add(i + 1);
 		}
 
-		// Thanks to http://petrocket.blogspot.com/2010/04/sphere-to-cube-mapping.html
-		static Vector3 CubifyFace(Vector3 p)
+		return triangles;
+	}
+
+	private List<Vector3> ConvertToSphereCoordinates(List<Vector2> coords)
+	{
+		List<Vector3> sphereVertices = new List<Vector3>();
+
+		foreach (var coord in coords)
 		{
-			const float inverseSqrt2 = 0.70710676908493042f;
+			// Convertir les coordonnées du plan 2D à des coordonnées sphériques
+			Coordinate c = new Coordinate(coord.x * Mathf.Deg2Rad, coord.y * Mathf.Deg2Rad);
+			Vector3 sphereVertex = SphericalToCartesian(c, radius);
+			sphereVertices.Add(sphereVertex);
 
-			float a2 = p.x * p.x * 2.0f;
-			float b2 = p.z * p.z * 2.0f;
-			float inner = -a2 + b2 - 3;
-			float innersqrt = -Mathf.Sqrt((inner * inner) - 12.0f * a2);
-
-			if (p.x != 0)
-			{
-				p.x = Mathf.Min(1, Mathf.Sqrt(innersqrt + a2 - b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.x);
-			}
-
-			if (p.z != 0)
-			{
-				p.z = Mathf.Min(1, Mathf.Sqrt(innersqrt - a2 + b2 + 3.0f) * inverseSqrt2) * Mathf.Sign(p.z);
-			}
-
-			// Top/bottom face
-			p.y = Mathf.Sign(p.y);
-
-			return p;
+			//Debug.Log("Transformed Coord: " + sphereVertex);
 		}
+
+		return sphereVertices;
+	}
+
+	private Vector3 SphericalToCartesian(Coordinate sphericalCoord, float radius)
+	{
+		// Les coordonnées sphériques définissent un point sur une sphère en termes de longitude et de latitude
+		float x = radius * Mathf.Sin(sphericalCoord.latitude) * Mathf.Cos(sphericalCoord.longitude);
+		float z = radius * Mathf.Cos(sphericalCoord.latitude); // Utilisation de Cos pour la composante y
+		float y = radius * Mathf.Sin(sphericalCoord.latitude) * Mathf.Sin(sphericalCoord.longitude);
+
+		return new Vector3(x, y, z);
+	}
 }

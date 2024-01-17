@@ -158,7 +158,7 @@ public class Planet : MonoBehaviour
 
 	void GenerateMesh()
 	{
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < meshFilters.Length; i++)
 		{
 			if (meshFilters[i].gameObject.activeSelf)
 			{
