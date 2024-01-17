@@ -27,12 +27,10 @@ public class PointComparer : IComparer<Vector3>
 public class TerrainFace : MonoBehaviour
 {
 	Mesh mesh;
-	int resolution;
-	List<Vector2> coords;
-	//Vector3 axisA;
-	//Vector3 axisB;
-	float radius;
-	List<Vector3> vertices;
+    int resolution;
+    List<Vector2> coords;
+    float radius;
+    List<Vector3> vertices;
 
 	public TerrainFace(Mesh mesh, int resolution, List<Vector2> coords, float radius)
 	{
@@ -48,21 +46,21 @@ public class TerrainFace : MonoBehaviour
 	public void ConstructMesh()
 	{
 		// Convertir les coordonnées du plan 2D à des coordonnées sphériques
-		List<Vector3> sphereVertices = ConvertToSphereCoordinates(coords);
+        List<Vector3> planeVertices = ConvertToPlaneCoordinates(coords);
 
-		// Trouver un point de référence (par exemple, le centroïde)
-		Vector3 referencePoint = FindReferencePoint(sphereVertices);
+        // Trouver un point de référence (par exemple, le centroïde)
+        Vector3 referencePoint = FindReferencePoint(planeVertices);
 
-		// Trier les vertices en fonction de l'angle polaire
-		sphereVertices.Sort(new PointComparer(referencePoint));
+        // Trier les vertices en fonction de l'angle polaire
+        planeVertices.Sort(new PointComparer(referencePoint));
 
-		// Trianguler les vertices pour créer des faces
-		List<int> triangles = Triangulate(sphereVertices.Count);
+        // Trianguler les vertices pour créer des faces
+        List<int> triangles = Triangulate(planeVertices.Count);
 
-		// Assigner les vertices et les triangles au mesh
-		mesh.Clear();
-		mesh.vertices = sphereVertices.ToArray();
-		mesh.triangles = triangles.ToArray();
+        // Assigner les vertices et les triangles au mesh
+        mesh.Clear();
+        mesh.vertices = planeVertices.ToArray();
+        mesh.triangles = triangles.ToArray();
 		//mesh.RecalculateNormals();
 	}
 
@@ -103,18 +101,32 @@ public class TerrainFace : MonoBehaviour
 
 	// Triangulation function for a convex polygon
 	List<int> Triangulate(int vertexCount)
-	{
-		List<int> triangles = new List<int>();
+    {
+        List<int> triangles = new List<int>();
 
-		for (int i = 1; i < vertexCount - 1; i++)
-		{
-			triangles.Add(0);
-			triangles.Add(i);
-			triangles.Add(i + 1);
-		}
+        for (int i = 1; i < vertexCount - 1; i++)
+        {
+            triangles.Add(0);
+            triangles.Add(i);
+            triangles.Add(i + 1);
+        }
 
-		return triangles;
-	}
+        return triangles;
+    }
+
+	private List<Vector3> ConvertToPlaneCoordinates(List<Vector2> coords)
+    {
+        List<Vector3> planeVertices = new List<Vector3>();
+
+        foreach (var coord in coords)
+        {
+            // Les coordonnées du plan 2D restent inchangées
+            Vector3 planeVertex = new Vector3(coord.x, 0f, coord.y);
+            planeVertices.Add(planeVertex);
+        }
+
+        return planeVertices;
+    }
 
 	private List<Vector3> ConvertToSphereCoordinates(List<Vector2> coords)
 	{
