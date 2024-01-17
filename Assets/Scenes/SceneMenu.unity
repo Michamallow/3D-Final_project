@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1274,9 +1274,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 755358035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66312c62beaa4a149a27601895193001, type: 3}
+  m_Script: {fileID: 11500000, guid: c4115a29f0ecf454fa1a20a37367f5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
+  sonJeu: {fileID: 0}
 --- !u!114 &755358041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1286,9 +1288,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 755358035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27653b2566c8d0940bd096bd777767d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 745f3df469abd8b47bd57826af84a4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 2086436943}
 --- !u!1 &772822258
 GameObject:
   m_ObjectHideFlags: 0
@@ -4238,10 +4241,10 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 755358041}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: SetFullScreen
-        m_Mode: 0
+      - m_Target: {fileID: 755358040}
+        m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
+        m_MethodName: ToggleFlagName
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

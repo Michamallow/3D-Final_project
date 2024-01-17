@@ -8,26 +8,27 @@ public class EarthBehaviour : MonoBehaviour
     [SerializeField]
     float velocity_factor = 1; // Adjust this value for rotation smoothness
     [SerializeField]
-    float speed_factor = 100;
+    float speedFactor = 100;
+
+    bool disableRotation = false;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            disableRotation = IsOverCanvas();
             originMousePos = Input.mousePosition;
             rotationVelocity = Vector2.zero; // Reset velocity on mouse down
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && !disableRotation)
         {
-            print("MOUSE MOVE");
             Vector3 delta = Input.mousePosition - originMousePos;
-            print(delta);
-            rotationVelocity = speed_factor * Time.deltaTime * delta; // Adjust speed
+            rotationVelocity = speedFactor * Time.deltaTime * delta; // Adjust speed
             RotateSphere(rotationVelocity);
             originMousePos = Input.mousePosition;
         }
-        else
+        else if (!disableRotation)
         {
             // Apply a smoothing effect to slow down the rotation gradually
             rotationVelocity = Vector2.Lerp(rotationVelocity, Vector2.zero, velocity_factor * Time.deltaTime);
@@ -44,5 +45,10 @@ public class EarthBehaviour : MonoBehaviour
 
         // Multiply the rotation by Time.deltaTime to make it frame-rate independent
         transform.Rotate(rotationAxis, delta.magnitude * Time.deltaTime, Space.World);
+    }
+
+    private bool IsOverCanvas()
+    {
+        return Input.mousePosition.x > 32 && Input.mousePosition.x < 302;
     }
 }

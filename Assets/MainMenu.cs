@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void LOAD_SCENE()
     {
-        SceneManager.LoadScene("Flag");
+        SceneManager.LoadScene("EarthScene");
     }
 
     public void ExitGame()
@@ -34,8 +34,6 @@ public class MainMenu : MonoBehaviour
         PanelOption.SetActive(true);
         PanelPrincipal.SetActive(false);
         panelOnOff = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
 
         // Récupérez les références des éléments de l'UI

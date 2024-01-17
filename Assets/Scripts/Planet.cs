@@ -131,7 +131,8 @@ public class Planet : MonoBehaviour
 			return;
 		}
 
-		Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+		Vector3 camDeltaPos = cam.transform.position - transform.position;
+		Ray ray = new Ray(new Vector3(cam.transform.position.x + camDeltaPos.x, cam.transform.position.y + camDeltaPos.y, camDeltaPos.z), cam.transform.forward);
 		
 		// Draw the ray in the Scene view
 		Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);

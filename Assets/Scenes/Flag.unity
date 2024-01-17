@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,7 +228,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1510, y: 114.2428}
+  m_SizeDelta: {x: 220.4, y: 638}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &301249377
 MonoBehaviour:
@@ -642,8 +642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -257.02}
-  m_SizeDelta: {x: 1510, y: 123.96}
+  m_AnchoredPosition: {x: -541.2998, y: 0.000061035}
+  m_SizeDelta: {x: 220.4005, y: 638}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979031689
 MonoBehaviour:
@@ -658,8 +658,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 2113441364}
-  m_Horizontal: 1
-  m_Vertical: 0
+  m_Horizontal: 0
+  m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -741,7 +741,6 @@ MonoBehaviour:
   textPrefab: {fileID: 8381111790759083790, guid: 238a3f0faaf028b4aba645e1712c4573, type: 3}
   content: {fileID: 2113441364}
   centerImageTransform: {fileID: 578125584}
-  numberOfFlags: 0
 --- !u!1 &2113441363
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +774,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1510, y: 248.7802}
+  m_SizeDelta: {x: 220.4, y: 638}
   m_Pivot: {x: 0, y: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

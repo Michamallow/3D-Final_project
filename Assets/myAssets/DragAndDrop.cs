@@ -8,7 +8,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private Vector2 initialPosition;
     private Transform originalParent; // Stocke le parent d'origine de l'objet
     private bool isDragging = false;
-    private float scaleFactor = 0.25f; // Facteur de réduction
+    private float scaleFactor = 0.5f; // Facteur de réduction
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if (isDragging)
         {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+            rectTransform.anchoredPosition += eventData.delta;
         }
     }
 

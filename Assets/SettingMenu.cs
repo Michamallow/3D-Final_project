@@ -15,7 +15,7 @@ public class SettingMenu : MonoBehaviour
         if (setting == null)
         {
 
-            DontDestroyOnLoad(this.gameObject);
+            // DontDestroyOnLoad(this.gameObject);
             setting = this;
         }
         else if (setting != this)
@@ -67,6 +67,11 @@ public class SettingMenu : MonoBehaviour
         AudioSource audio = GetComponent<AudioSource>();
         audio.clip = sonJeu;
         audio.Play();
+    }
+
+    public void ToggleFlagName(bool flag)
+    {
+        PlayerPrefs.SetInt("ShowFlagNames", flag ? 1 : 0);
     }
 
     // Start is called before the first frame update
