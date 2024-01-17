@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void LOAD_SCENE()
     {
-        SceneManager.LoadScene("Flag");
+        SceneManager.LoadScene("EarthScene");
     }
 
     public void ExitGame()
