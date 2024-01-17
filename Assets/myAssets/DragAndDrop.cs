@@ -47,6 +47,24 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             // Réinitialiser à la position d'origine et restaurer la taille
             rectTransform.anchoredPosition = initialPosition;
             rectTransform.localScale = Vector3.one;
+
+            //On regarde si le drapeau à été placé sur le bon pays
+            IsValid();
         }
+    }
+
+    //Methode pour verifie si le drapeau à été laché sur le bon pays
+    public void IsValid(){
+        GameObject planetObject = GameObject.Find("Planet");
+        GameObject meshObject = planetObject.GetComponent<Planet>().hitMeshObject;
+        bool isvalid = false;
+
+        if( gameObject.name == meshObject.name){
+            isvalid = true;
+            Debug.Log("Bravo, vous avez trouvé : " + meshObject.name);
+        }else{
+            Debug.Log("Faux, ce n'est pas le bon pays");
+        }
+
     }
 }

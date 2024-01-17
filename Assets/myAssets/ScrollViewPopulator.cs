@@ -70,6 +70,7 @@ public class ScrollViewPopulator : MonoBehaviour
                 Text textComponent = textGO.GetComponent<Text>();
                 
                 DragAndDrop dragAndDropScript = imageGO.AddComponent<DragAndDrop>();
+                imageGO.name = flags[randomIndex].name;
 
                 if (textComponent != null)
                 {

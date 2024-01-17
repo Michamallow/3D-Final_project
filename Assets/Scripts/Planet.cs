@@ -20,7 +20,8 @@ public class Planet : MonoBehaviour
 	TerrainFace[] terrainFaces;
 	private Material originalMaterial;
     private Material highlightMaterial;
-	
+	public GameObject hitMeshObject;
+
 	
 	void Start()
     {
@@ -145,10 +146,12 @@ public class Planet : MonoBehaviour
 			{
 				// Highlight the face by passing the hit object's transform
 				HighlightFace(hit.transform);
+				hitMeshObject = hit.transform.gameObject;
 			}
 		}else{
 			// Reset all materials to originalMaterial
 			HighlightFace(null);
+			hitMeshObject = null;
 		}
 	}
 
